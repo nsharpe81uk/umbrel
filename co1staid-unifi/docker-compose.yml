@@ -1,10 +1,9 @@
 version: '3.7'
-
 services:
-    unifi-db:
-        image: docker.io/mongo:6.0
-        container_name: unifi-db
-        environment:
+  unifi-db:
+    image: docker.io/mongo:6.0
+    container_name: unifi-db
+    environment:
         - MONGO_INITDB_ROOT_USERNAME=root
         - MONGO_INITDB_ROOT_PASSWORD='A~TC#3+T!*k9TX#
     volumes:
@@ -12,7 +11,7 @@ services:
         - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     restart: unless-stopped
 
-    unifi-network-application:
+  unifi-network-application:
     image: lscr.io/linuxserver/unifi-network-application:latest
     container_name: unifi-network-application
     environment:
@@ -31,4 +30,6 @@ services:
         - 3478:3478/udp
         - 10001:10001/udp
         - 8080:8080
+    restart: unless-stopped
+
     restart: unless-stopped
