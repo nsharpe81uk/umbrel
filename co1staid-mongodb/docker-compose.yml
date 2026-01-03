@@ -1,16 +1,21 @@
-version: "3.8"
-
-services:
-  mongo:
-    image: mongo:8.0
-    container_name: mongo_container
-    ports:
-      - "27017:27017"
-    volumes:
-      - "${APP_DATA_DIR}/mongo_data:/data/db"
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+Services:
+ mongo:
+    image: mongo:8.0.11@sha256:5941949d3887e40be5175787aade07dc052f2cddb8ce21b740c3948eba6a3ed0
+    restart: on-failure
+    command: ["--replSet", "rs", "--bind_ip_all", "--port", "27017"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: A~TC#3+T!*k9TX#
-    command: ["--bind_ip_all"]
-    restart: unless-stopped
+    healthcheck:
+      test: >
+        echo "try { rs.status() } catch (err) { rs.initiate({ _id: 'rs', members: [{ _id: 0, host: 'habitica_mongo_1:27017' }] }) }"
+        | mongosh --port 27017 --quiet
+      interval: 10s
+      timeout: 30s
+      start_period: 0s
+      start_interval: 1s
+      retries: 30
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/data/db:rw
+      - ${APP_DATA_DIR}/data/dbconf:/data/configdb
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
