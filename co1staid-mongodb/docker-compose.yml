@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: mongo_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - "${APP_DATA_DIR}/mongo_data:/data/db"
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: A~TC#3+T!*k9TX#
+    command: ["--bind_ip_all"]
+    restart: unless-stopped
