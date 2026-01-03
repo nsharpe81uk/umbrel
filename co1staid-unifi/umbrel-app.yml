@@ -1,0 +1,27 @@
+manifestVersion: 1
+id: co1staid-unifi
+name: co1staid-unifi
+tagline: unifi stack
+icon: https://logos-world.net/wp-content/uploads/2025/01/UniFi-Logo.jpg
+category: Development
+version: "1.0.0"
+port: 8443
+description: >-
+     unifi stack
+
+developer: co1staid
+website: https://umbrel.com
+submitter: Umbrel
+submission: https://github.com/getumbrel/umbrel-hello-world-app
+repo: https://github.com/getumbrel/umbrel-hello-world-app
+support: https://github.com/getumbrel/umbrel-hello-world-app/issues
+gallery:
+  - https://i.imgur.com/yyVG0Jb.jpeg
+  - https://i.imgur.com/yyVG0Jb.jpeg
+  - https://i.imgur.com/yyVG0Jb.jpeg
+releaseNotes: >-
+  Add what's new in the latest version of your app here.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
